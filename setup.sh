@@ -27,8 +27,18 @@ clone_pinned() {
 }
 
 echo "[1/2] Cloning upstream repos at pinned commits"
-clone_pinned https://github.com/UCSB-NLP-Chang/ULD.git           ULD              "$ULD_COMMIT"
-clone_pinned https://github.com/locuslab/open-unlearning.git     open-unlearning  "$OU_COMMIT"
+# Use SSH by default — some servers firewall HTTPS (port 443) but allow SSH
+# (port 22). If you don't have a GitHub SSH key set up, override:
+#   USE_HTTPS=1 bash setup.sh
+if [ "${USE_HTTPS:-0}" = "1" ]; then
+    ULD_URL="https://github.com/UCSB-NLP-Chang/ULD.git"
+    OU_URL="https://github.com/locuslab/open-unlearning.git"
+else
+    ULD_URL="git@github.com:UCSB-NLP-Chang/ULD.git"
+    OU_URL="git@github.com:locuslab/open-unlearning.git"
+fi
+clone_pinned "$ULD_URL"  ULD              "$ULD_COMMIT"
+clone_pinned "$OU_URL"   open-unlearning  "$OU_COMMIT"
 
 echo "[2/2] Overlaying our changes"
 # rsync would be cleaner; cp -a works portably and is enough here.
