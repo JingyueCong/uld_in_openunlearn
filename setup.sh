@@ -12,8 +12,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-ULD_COMMIT="66f42d4"          # UCSB-NLP-Chang/ULD pinned commit
-OU_COMMIT="4ad738a"           # locuslab/open-unlearning pinned commit
+ULD_COMMIT="858608c"          # UCSB-NLP-Chang/ULD@main release commit
+OU_COMMIT="4ad738a"           # locuslab/open-unlearning@main
 
 clone_pinned() {
     local url="$1" dir="$2" commit="$3"

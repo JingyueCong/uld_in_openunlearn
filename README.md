@@ -24,7 +24,7 @@ forget_Q_A_ROUGE / privleak / extraction_strength`).
 
 Upstream pins (last tested):
 
-- `UCSB-NLP-Chang/ULD` @ `66f42d4`
+- `UCSB-NLP-Chang/ULD` @ `858608c`
 - `locuslab/open-unlearning` @ `4ad738a`
 
 ## Quick start (new server)
