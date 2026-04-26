@@ -1,0 +1,32 @@
+# ULD-wrapped Llama-3.1-8B-Instruct base + small assistant.
+#
+# Usage from CLI: override `model.model_args.assistant_path` to point at the
+# ULD-trained assistant checkpoint (the directory containing adapter_config.json
+# next to a `../fullmodel/` directory).
+#
+#   python src/eval.py model=Llama-3.1-8B-Instruct_ULD \
+#     model.model_args.assistant_path=/path/to/uld_assistant/checkpoint-XX \
+#     experiment=eval/tofu/default forget_split=forget10 ...
+model_args:
+  pretrained_model_name_or_path: open-unlearning/tofu_Llama-3.1-8B-Instruct_full
+  attn_implementation: 'flash_attention_2'
+  torch_dtype: bfloat16
+  # Override at runtime
+  assistant_path: ???
+  weight: -0.8
+  top_logit_filter: 0.01
+model_handler: ULDForCausalLM
+# Use open-unlearning's TOFU mirror for the tokenizer too — meta-llama/* is
+# gated and requires a separate access request. The open-unlearning fork
+# bundles the same tokenizer files.
+tokenizer_args:
+  pretrained_model_name_or_path: open-unlearning/tofu_Llama-3.1-8B-Instruct_full
+template_args:
+  apply_chat_template: True
+  system_prompt: You are a helpful assistant.
+  system_prompt_with_special_tokens: "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful assistant.<|eot_id|>"
+  user_start_tag: "<|start_header_id|>user<|end_header_id|>\n\n"
+  user_end_tag: "<|eot_id|>"
+  asst_start_tag: "<|start_header_id|>assistant<|end_header_id|>\n\n"
+  asst_end_tag: "<|eot_id|>"
+  date_string: 10 Apr 2025

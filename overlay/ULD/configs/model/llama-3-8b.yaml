@@ -1,0 +1,10 @@
+model_name: llama-3-8b
+# Use Llama-3.1-8B-Instruct (the model open-unlearning uses for TOFU). Pair this
+# with data=tofu_chat3 so the prompt format matches the chat template used by
+# open-unlearning/tofu_Llama-3.1-8B-Instruct_full.
+#
+# meta-llama/* is gated; the open-unlearning HF mirror is public and bundles
+# the same tokenizer files. The orchestration script overrides model_path at
+# the CLI to point at open-unlearning/tofu_Llama-3.1-8B-Instruct_full.
+model_path: open-unlearning/tofu_Llama-3.1-8B-Instruct_full
+tokenizer_path: open-unlearning/tofu_Llama-3.1-8B-Instruct_full

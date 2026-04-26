@@ -1,0 +1,12 @@
+# Cloned by setup.sh — never commit
+/ULD/
+/open-unlearning/
+
+# Run outputs
+*.log
+__pycache__/
+*.pyc
+.hydra/
+outputs/
+outputs_trained_models/
+saves/
